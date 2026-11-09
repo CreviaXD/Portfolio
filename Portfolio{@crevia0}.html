@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F4F4F2">
+<meta name="description" content="Suraj (Crevia) - graphic & UI designer. Thumbnails, social posts, UI, posters and video edits.">
+<title>Crevia | Suraj - Designer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap">
+<style>
+/* ===== COLORS: change these to restyle everything ===== */
+:root{
+  --blue:#2F5BFF; --pink:#FF4FA3; --orange:#FF7A1A;
+  --bg:#F4F4F2; --ink:#111114; --muted:#55555C; --img:#E6E6E2;
+  --nav-h:72px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1360px;margin:0 auto;padding:0 32px}
+
+/* ===== background shapes ===== */
+.shapes{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.shapes i{position:absolute;display:block}
+.s-blue{top:160px;right:-240px;width:420px;height:420px;border-radius:50%;background:var(--blue);animation:drift1 12s ease-in-out infinite}
+.s-pink{left:-130px;bottom:140px;width:300px;height:300px;background:var(--pink);animation:morph 9s ease-in-out infinite,drift2 14s ease-in-out infinite}
+.s-orange{right:7%;bottom:100px;width:96px;height:96px;border-radius:28px;background:var(--orange);animation:spin 12s linear infinite}
+
+/* ===== sticky nav ===== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(244,244,242,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.nav{display:flex;gap:16px;align-items:center;justify-content:space-between;min-height:var(--nav-h);padding:14px 0}
+.logo{display:inline-flex;align-items:center;min-height:44px;font:700 26px 'Space Grotesk',sans-serif;letter-spacing:-.02em}
+.logo span{color:var(--orange)}
+.menu{display:flex;gap:8px}
+.menu a{display:inline-flex;align-items:center;padding:0 24px;min-height:44px;border-radius:999px;border:2px solid var(--ink);font-size:16px;font-weight:500;transition:background .25s,color .25s}
+.menu a.active{background:var(--ink);color:var(--bg)}
+
+/* ===== sections ===== */
+main{position:relative;z-index:1}
+.page{scroll-margin-top:0}
+#work,#about,#contact{scroll-margin-top:calc(var(--nav-h) - 24px)}
+
+/* scroll reveal: animations wait until the element scrolls into view */
+.rise,.fade,.pop{animation-play-state:paused}
+.go.fade,.go.pop,.go .rise{animation-play-state:running}
+.mask{display:block;overflow:hidden;padding:.06em 0 .12em}
+.rise{display:block;animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+.fade{animation:fadeUp .9s cubic-bezier(.2,.8,.2,1) both}
+.pop{animation:pop .9s cubic-bezier(.3,1.4,.5,1) both}
+.pill{display:inline-block;padding:0 .2em .06em;border-radius:.3em}
+.pill.b{background:var(--blue);color:#fff;transform:rotate(-2deg)}
+.pill.p{background:var(--pink);transform:rotate(2deg)}
+.pill.o{background:var(--orange);transform:rotate(-2deg)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:20px 36px;border-radius:999px;border:2px solid var(--ink);font-size:17px;font-weight:500;text-align:center;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.btn:hover{transform:translateY(-4px) rotate(-1deg)}
+.b-blue{background:var(--blue);color:#fff}
+.b-pink{background:var(--pink)}
+.b-orange{background:var(--orange)}
+.b-line{background:transparent}
+.row-btns{display:flex;flex-wrap:wrap;gap:14px}
+
+/* ===== home ===== */
+.hero{display:flex;flex-wrap:wrap;align-items:center;gap:32px;padding:calc(var(--nav-h) + 24px) 0 80px}
+.hero-text{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:32px}
+.eyebrow{font-size:15px;font-weight:500;letter-spacing:.16em}
+.hero h1{font:700 clamp(56px,8.5vw,124px)/1.02 'Space Grotesk',sans-serif;letter-spacing:-.04em}
+.lead{max-width:540px;font-size:21px;line-height:1.55;color:var(--muted)}
+.hero-photo{flex:1 1 440px;min-width:0;height:660px;position:relative;display:flex;align-items:center;justify-content:center}
+.photo-wrap{position:relative;width:380px;max-width:84%}
+.photo{position:relative;width:100%;height:540px;border-radius:190px 190px 28px 28px;border:2px solid var(--ink);background:var(--img);box-shadow:18px 18px 0 var(--blue);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;animation:floaty 6s ease-in-out infinite}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo small{font-size:13px;font-weight:500;letter-spacing:.14em;color:var(--muted)}
+.sticker{position:absolute;left:-70px;top:30px;width:150px;height:150px;border-radius:50%;background:var(--orange);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center}
+.sticker svg{position:absolute;top:0;left:0;width:100%;height:100%;animation:spin 12s linear infinite}
+.sticker span{font-size:44px;font-weight:700}
+.dot-pink{position:absolute;left:6%;bottom:40px;width:90px;height:90px;border-radius:26px;background:var(--pink);border:2px solid var(--ink);animation:spin 22s linear infinite reverse}
+.dot-orange{position:absolute;right:4%;top:36px;width:64px;height:64px;border-radius:50%;background:var(--orange);border:2px solid var(--ink);animation:floaty 8s ease-in-out infinite reverse}
+.marquee{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);overflow:hidden;padding:22px 0;background:var(--bg)}
+.track{display:flex;width:max-content;gap:24px;align-items:center;white-space:nowrap;animation:slide 30s linear infinite}
+.track span.t{padding:10px 32px;border-radius:999px;font:500 32px 'Space Grotesk',sans-serif}
+.track span.s{font-size:32px}
+
+/* ===== work ===== */
+.page-pad{padding:96px 0;display:flex;flex-direction:column;gap:56px}
+.big{font:700 clamp(72px,12vw,180px)/1 'Space Grotesk',sans-serif;letter-spacing:-.045em}
+.work-head{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+.work-head .count{font-size:17px;font-weight:500;letter-spacing:.1em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px}
+.card{display:flex;flex-direction:column;gap:16px;padding:20px;border-radius:28px;border:2px solid var(--ink);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.card:hover{transform:translateY(-12px) rotate(-1.5deg)}
+.card.blue{background:var(--blue);color:#fff}
+.card.pink{background:var(--pink)}
+.card.orange{background:var(--orange)}
+.shot{position:relative;height:280px;border-radius:18px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);display:flex;align-items:flex-end;justify-content:space-between;padding:16px;overflow:hidden}
+.shot img,.shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shot small{font-size:13px;font-weight:500;letter-spacing:.12em}
+.shot b{width:30px;height:30px;border-radius:50%;background:var(--ink)}
+.card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card h3{font:700 30px/1.15 'Space Grotesk',sans-serif}
+.card p{font-size:17px}
+
+/* ===== about ===== */
+.about{display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start;padding:96px 0}
+.about-photo{flex:1 1 320px;min-width:0;max-width:460px}
+.about-photo .photo{height:540px;border-radius:28px;box-shadow:16px 16px 0 var(--pink)}
+.about-text{flex:2 1 520px;min-width:0;display:flex;flex-direction:column;gap:36px}
+.about h2{font:700 clamp(64px,9vw,140px)/1 'Space Grotesk',sans-serif;letter-spacing:-.045em}
+.about-p{font:400 clamp(20px,2.8vw,36px)/1.4 'Space Grotesk',sans-serif}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{padding:14px 26px;border-radius:999px;border:2px solid var(--ink);font-size:18px;font-weight:500}
+.list{display:flex;flex-direction:column;border-bottom:2px solid var(--ink)}
+.item{--c:var(--blue);--t:#fff;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;border-top:2px solid var(--ink);font:500 30px 'Space Grotesk',sans-serif;transition:padding .4s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+.item:hover{background:var(--c);color:var(--t);padding-left:28px;padding-right:28px}
+.item.p{--c:var(--pink);--t:var(--ink)}
+.item.o{--c:var(--orange);--t:var(--ink)}
+
+/* ===== contact ===== */
+.contact{padding:96px 0 120px;display:flex;flex-direction:column;gap:56px}
+.contact h2{font:700 clamp(64px,11vw,176px)/.98 'Space Grotesk',sans-serif;letter-spacing:-.045em}
+.contact .btn{padding:22px 40px;font-size:18px}
+
+footer{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding-bottom:40px;font-size:14px;color:var(--muted)}
+footer a{display:inline-flex;align-items:center;min-height:44px}
+
+@keyframes rise{from{transform:translateY(110%)}to{transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(44px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{from{opacity:0;transform:scale(.6) rotate(-8deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-16px) rotate(1deg)}}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,30px) scale(1.06)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(30px,-40px) rotate(12deg)}}
+@keyframes morph{0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}50%{border-radius:40% 60% 45% 55%/60% 40% 60% 40%}}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== tablet ===== */
+@media (max-width:900px){
+  .wrap{padding:0 24px}
+  .hero{padding-bottom:64px}
+  .hero-photo{height:600px}
+  .page-pad,.about{padding:72px 0}
+  .contact{padding:72px 0 96px}
+  .about{gap:48px}
+  .about-photo{max-width:100%;width:100%;padding-right:16px}
+}
+
+/* ===== mobile ===== */
+@media (max-width:640px){
+  :root{--nav-h:60px}
+  .wrap{padding:0 20px}
+  .nav{padding:10px 0;gap:8px}
+  .logo{font-size:23px}
+  .menu{gap:6px}
+  .menu a{padding:0 13px;min-height:40px;font-size:14px;border-width:1.5px}
+  .menu a.hide-m{display:none}
+
+  .s-blue{width:260px;height:260px;right:-150px;top:120px}
+  .s-pink{width:190px;height:190px;left:-100px;bottom:100px}
+  .s-orange{width:60px;height:60px;border-radius:18px;bottom:70px}
+
+  .hero{gap:24px;padding:calc(var(--nav-h) + 20px) 0 48px}
+  .hero-text{flex-basis:100%;gap:22px}
+  .eyebrow{font-size:12px;letter-spacing:.12em;line-height:1.6}
+  .hero h1{font-size:clamp(40px,12vw,64px);letter-spacing:-.035em}
+  .lead{font-size:17px}
+  .btn{padding:14px 26px;font-size:16px}
+  .hero-photo{flex-basis:100%;height:auto;padding:24px 0 16px}
+  .photo-wrap{width:290px;max-width:78%}
+  .photo{height:400px;border-radius:145px 145px 24px 24px;box-shadow:12px 12px 0 var(--blue)}
+  .sticker{left:-34px;top:14px;width:104px;height:104px}
+  .sticker span{font-size:30px}
+  .dot-pink{width:56px;height:56px;border-radius:16px;bottom:16px;left:3%}
+  .dot-orange{width:40px;height:40px;top:12px;right:3%}
+  .marquee{padding:14px 0}
+  .track{gap:14px}
+  .track span.t{padding:6px 20px;font-size:20px}
+  .track span.s{font-size:20px}
+
+  .page-pad{padding:56px 0;gap:32px}
+  .big{font-size:clamp(56px,20vw,96px)}
+  .work-head .count{font-size:13px}
+  .grid{gap:18px}
+  .card{padding:14px;border-radius:22px;gap:12px}
+  .card:hover{transform:none}
+  .shot{height:220px;border-radius:14px}
+  .card h3{font-size:24px}
+  .card p{font-size:15px}
+
+  .about{padding:56px 0;gap:36px}
+  .about-photo{padding-right:12px}
+  .about-photo .photo{height:380px;border-radius:24px;box-shadow:10px 10px 0 var(--pink)}
+  .about-text{gap:28px}
+  .about h2{font-size:clamp(46px,15vw,80px)}
+  .chip{padding:10px 18px;font-size:15px}
+  .item{font-size:19px;padding:16px 0}
+  .item:hover{padding-left:0;padding-right:0;background:none;color:inherit}
+
+  .contact{padding:56px 0 72px;gap:32px}
+  .contact h2{font-size:clamp(40px,12.5vw,80px)}
+  .contact .btn,.row-btns .btn{padding:16px 22px;font-size:16px}
+  .contact .btn{width:100%;overflow-wrap:anywhere}
+  .row-btns{gap:12px}
+  footer{padding-bottom:28px}
+}
+
+/* very small phones */
+@media (max-width:360px){
+  .wrap{padding:0 16px}
+  .menu a{padding:0 10px;font-size:13px}
+  .logo{font-size:21px}
+}
+
+/* no-JS fallback: show everything */
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+<noscript><style>.rise,.fade,.pop{animation-play-state:running}</style></noscript>
+</head>
+<body>
+
+<div class="shapes" aria-hidden="true"><i class="s-blue"></i><i class="s-pink"></i><i class="s-orange"></i></div>
+
+<!-- ================= STICKY NAV ================= -->
+<header class="topbar">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="logo" href="#home">Crevia<span>.</span></a>
+      <div class="menu">
+        <a href="#home" class="active hide-m">Home</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HOME ================= -->
+  <section id="home" class="page">
+    <div class="wrap">
+      <div class="hero">
+        <div class="hero-text">
+          <span class="eyebrow fade" style="animation-delay:.1s">HI, I'M SURAJ · CREVIA · GRAPHIC &amp; UI DESIGNER</span>
+          <h1>
+            <span class="mask"><span class="rise" style="animation-delay:.15s">Design</span></span>
+            <span class="mask"><span class="rise" style="animation-delay:.3s">that <span class="pill b">moves</span></span></span>
+            <span class="mask"><span class="rise" style="animation-delay:.45s">&amp; <span class="pill p">pops.</span></span></span>
+          </h1>
+          <p class="lead fade" style="animation-delay:.6s">Thumbnails, social posts, UI, posters and video edits that look clean and feel alive.</p>
+          <div class="row-btns fade" style="animation-delay:.75s">
+            <a class="btn b-blue" href="#work">View my work</a>
+            <a class="btn b-line" href="#contact">Contact me</a>
+          </div>
+        </div>
+
+        <div class="hero-photo">
+          <div class="dot-pink" aria-hidden="true"></div>
+          <div class="dot-orange" aria-hidden="true"></div>
+          <div class="photo-wrap pop" style="animation-delay:.3s">
+            <div class="photo">
+              <!-- PUT YOUR PHOTO HERE: delete the svg + small and uncomment the img line -->
+              <!-- <img src="photo.jpg" alt="Suraj"> -->
+              <svg width="130" height="130" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" style="color:#55555C" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+              <small>YOUR PHOTO HERE</small>
+            </div>
+            <div class="sticker">
+              <svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><text font-size="18" font-weight="700" letter-spacing="3" fill="#111114" font-family="Space Grotesk, sans-serif"><textPath href="#ring">AVAILABLE FOR WORK • HIRE ME • </textPath></text></svg>
+              <span>↗</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="marquee"><div class="track" id="track"></div></div>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section id="work" class="page">
+    <div class="wrap page-pad">
+      <div class="work-head">
+        <h2 class="big"><span class="mask"><span class="rise" style="animation-delay:.1s">Work</span></span></h2>
+        <span class="count fade" style="animation-delay:.3s">06 CATEGORIES ↓</span>
+      </div>
+      <!-- To add your work: replace the <small>ADD YOUR IMAGE</small> with <img src="your-image.jpg" alt="Project name"> -->
+      <div class="grid">
+        <div class="fade" style="animation-delay:.05s"><div class="card blue"><div class="shot"><small>ADD YOUR IMAGE</small><b></b></div><div class="top"><h3>Thumbnails</h3><span>01</span></div><p>Canva · Photopea</p></div></div>
+        <div class="fade" style="animation-delay:.12s"><div class="card pink"><div class="shot"><small>ADD YOUR IMAGE</small><b></b></div><div class="top"><h3>Photo Editing</h3><span>02</span></div><p>Photopea</p></div></div>
+        <div class="fade" style="animation-delay:.19s"><div class="card orange"><div class="shot"><small>ADD YOUR IMAGE</small><b></b></div><div class="top"><h3>Instagram Posts</h3><span>03</span></div><p>Canva</p></div></div>
+        <div class="fade" style="animation-delay:.05s"><div class="card orange"><div class="shot"><small>ADD YOUR IMAGE</small><b></b></div><div class="top"><h3>UI Design</h3><span>04</span></div><p>Figma</p></div></div>
+        <div class="fade" style="animation-delay:.12s"><div class="card blue"><div class="shot"><small>ADD YOUR IMAGE</small><b></b></div><div class="top"><h3>Poster Design</h3><span>05</span></div><p>Canva · Photopea</p></div></div>
+        <div class="fade" style="animation-delay:.19s"><div class="card pink"><div class="shot"><small>ADD YOUR VIDEO</small><b></b></div><div class="top"><h3>Video Editing</h3><span>06</span></div><p>CapCut</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="page">
+    <div class="wrap about">
+      <div class="about-photo pop" style="animation-delay:.1s">
+        <div class="photo">
+          <!-- <img src="photo.jpg" alt="Suraj"> -->
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" style="color:#55555C" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <small>YOUR PHOTO HERE</small>
+        </div>
+      </div>
+      <div class="about-text">
+        <h2><span class="mask"><span class="rise" style="animation-delay:.1s">About me</span></span></h2>
+        <p class="about-p fade" style="animation-delay:.2s">I'm Suraj, the designer behind Crevia. I'm a student with 2+ years of experience, creating thumbnails, social posts, UI, posters and video edits with Canva, Figma, CapCut and Photopea. I love clean, minimal layouts with a little bit of motion.</p>
+        <div class="chips fade" style="animation-delay:.1s">
+          <span class="chip" style="background:var(--blue);color:#fff">Canva</span>
+          <span class="chip" style="background:var(--pink)">Figma</span>
+          <span class="chip" style="background:var(--orange)">CapCut</span>
+          <span class="chip" style="background:var(--blue);color:#fff">Photopea</span>
+        </div>
+        <div class="list">
+          <div class="item fade" style="animation-delay:.05s"><span>01 &nbsp; Thumbnail Design</span><span>→</span></div>
+          <div class="item p fade" style="animation-delay:.05s"><span>02 &nbsp; Photo Editing</span><span>→</span></div>
+          <div class="item o fade" style="animation-delay:.05s"><span>03 &nbsp; Instagram Posts</span><span>→</span></div>
+          <div class="item fade" style="animation-delay:.05s"><span>04 &nbsp; UI Design</span><span>→</span></div>
+          <div class="item p fade" style="animation-delay:.05s"><span>05 &nbsp; Poster Design</span><span>→</span></div>
+          <div class="item o fade" style="animation-delay:.05s"><span>06 &nbsp; Video Editing</span><span>→</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="page">
+    <div class="wrap contact">
+      <h2>
+        <span class="mask"><span class="rise" style="animation-delay:.1s">Let's make</span></span>
+        <span class="mask"><span class="rise" style="animation-delay:.25s"><span class="pill o">something</span> cool.</span></span>
+      </h2>
+      <div class="row-btns fade" style="animation-delay:.2s">
+        <a class="btn b-orange" href="mailto:surajroy2364@gmail.com">surajroy2364@gmail.com</a>
+        <a class="btn b-blue" href="https://instagram.com/surajroy2364" target="_blank" rel="noopener">Instagram @surajroy2364</a>
+        <a class="btn b-pink" href="https://x.com/crevia0" target="_blank" rel="noopener">X @crevia0</a>
+        <a class="btn b-orange" href="https://github.com/CreviaXD" target="_blank" rel="noopener">GitHub @CreviaXD</a>
+        <a class="btn b-blue" href="tel:+918961332364">+91 89613 32364</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>© 2026 Crevia · Suraj</span>
+    <a href="#home">Back to top ↑</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // tools marquee
+  var tools = ['Canva','Figma','CapCut','Photopea'];
+  var styles = ['background:var(--blue);color:#fff','background:var(--pink)','background:var(--orange)'];
+  var html = '';
+  for (var i = 0; i < 16; i++) {
+    html += '<span class="t" style="' + styles[i % 3] + '">' + tools[i % 4] + '</span><span class="s">✦</span>';
+  }
+  document.getElementById('track').innerHTML = html;
+
+  var links = document.querySelectorAll('.menu a');
+  var ids = ['home', 'work', 'about', 'contact'];
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  var reveal = document.querySelectorAll('.fade,.pop,.mask');
+
+  if ('IntersectionObserver' in window) {
+    // highlight the menu item of the section you are looking at
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ids.forEach(function (id) { spy.observe(document.getElementById(id)); });
+
+    // play each animation when it scrolls into view
+    var rev = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('go'); rev.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+    reveal.forEach(function (el) { rev.observe(el); });
+  } else {
+    reveal.forEach(function (el) { el.classList.add('go'); });
+  }
+
+  // last section is short on some screens, so highlight Contact at page bottom
+  window.addEventListener('scroll', function () {
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) setActive('contact');
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
